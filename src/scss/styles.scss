@@ -1,0 +1,29 @@
+$white: #f4f4f4;
+$theme-colors: (
+    "light":      #f0e2c8,
+    "dark":       #030104,
+    "primary":    #36485d,
+    "secondary":  #bb533e,
+    "info":       #abb4bd,
+    "success":    #439e6a,
+    "warning":    #d6c767,
+    "danger":     #c78585,
+    "accent1":    #68234c,
+    "accent2":    #816568,
+    "accent3":    #50bf34,
+);
+
+@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+body{
+  background-color: #909cf1;
+}
+
+input#date{
+  border: 1px solid #ced4da;
+  background-color: #f4f4f4;
+  padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+  border-radius: 5px;
+}
+
