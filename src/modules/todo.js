@@ -1,49 +1,76 @@
 const categories = (() => {
-    // module
     let categories = [];
-  
     const current = () => categories;
-  
     const addNew = (newCategory) => {
-        for(let i=0; i<categories.length; i++){
-            if(newCategory == categories[i]) return
-        }
+        categories.forEach(category => {
+            if (newCategory.returnTitle() == category.returnTitle()){
+                return
+            }
+        });
         categories.push(newCategory);
     };
-
-    const removeCategory = (category) =>{
-        categories = categories.filter(element => element != category)
+    const removeCategory = (categoryName) => {
+        categories = categories.filter(element => element.returnTitle() != categoryName);
+    }
+    const setCategories = (array) => {
+        categories = array;
     }
 
     return {
-      current,
-      addNew,
-      removeCategory
+        current,
+        addNew,
+        removeCategory,
+        setCategories
     };
-  })();
+})();
+
+class Category {
+    constructor(title) {
+        this.title = title;
+        this.store = [];
+    }
+
+    findTodo(todoTitle){
+        return this.store.filter(element => element.title == todoTitle)[0]
+    }
+
+    returnTitle(){
+        return this.title;
+    }
+    returnTodos() {
+        return this.store;
+    }
+
+    addTodo(todo) {
+        for (let i = 0; i < this.store.length; i++) {
+            if (todo.title == this.store[i].title){ return}
+        }
+        this.store.push(todo);
+    }
+
+    removeTodo(todo) {
+        this.store = this.store.filter(element => element != todo)
+    }
+
+    removeTodoFromTitle(todoTitle) {
+        this.store = this.store.filter(element => element.title != todoTitle)
+    }
+}
 
 class Todo {
-    constructor(title, description, deadline, priority) {
+    constructor(checked, title, priority, deadline) {
+        this.checked = checked;
         this.title = title;
-        this.description = description;
         this.dueDate = deadline
         this.priority = priority
     }
     returnTitle() {
         return this.title;
     }
+
+    flipChecker(){
+        this.checked = !this.checked;
+    }
 }
 
-let eat = new Todo("eat", "now", "today");
-console.log(eat.returnTitle());
-
-//categories.addNew("Food");
-//categories.addNew("Work");
-//categories.addNew("School");
-console.log(categories.current());
-//categories.addNew("School");
-console.log(categories.current());
-categories.removeCategory("Work");
-console.log(categories.current());
-
-export {categories}
+export {categories , Todo, Category}

@@ -1,9 +1,10 @@
-$white: #f4f4f4;
+$white: #FAFAFA;
+$min-contrast-ratio: 2.5;
 $theme-colors: (
     "light":      #f0e2c8,
     "dark":       #030104,
     "primary":    #36485d,
-    "secondary":  #bb533e,
+    "secondary":  #FF8A65,
     "info":       #abb4bd,
     "success":    #439e6a,
     "warning":    #d6c767,
@@ -17,13 +18,26 @@ $theme-colors: (
 @import '~bootstrap-icons/font/bootstrap-icons.css';
 
 body{
-  background-color: #909cf1;
+  background-color: #EDE7F6;
 }
+
 
 input#date{
   border: 1px solid #ced4da;
-  background-color: #f4f4f4;
+  background-color: #FAFAFA;
   padding: 0.375rem 2.25rem 0.375rem 0.75rem;
   border-radius: 5px;
 }
 
+#content > div > card:nth-child(1) > ul li div{
+  cursor: pointer;
+  user-select: none;
+}
+
+i{
+  pointer-events: none;
+}
+
+#strike{
+  text-decoration: line-through;
+}

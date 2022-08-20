@@ -1,17 +1,26 @@
 import "./scss/styles.scss";
-import * as bootstrap from 'bootstrap';
 import { pageLoad } from "./modules/page-load";
-import { categories } from "./modules/todo";
-
-const content = document.querySelector("#content");
-pageLoad(content);
+import { categories, Todo, Category } from "./modules/todo";
+import { listeners } from "./modules/page-dom";
 
 
-//categories.addNew("Food");
-//categories.addNew("Work");
-//categories.addNew("School");
-//console.log(categories.current());
-//categories.addNew("School");
-//console.log(categories.current());
-//categories.removeCategory("Work");
-//console.log(categories.current());
+const fetchCategoriesLocal = () => {
+    const brainDump = new Category("Brain dump");
+    let categoriesFetched = [];
+    const parsedObj = JSON.parse(localStorage.getItem("categories")); 
+    // set default category into categories
+    if(parsedObj == null){return [brainDump]}
+    parsedObj.forEach(categoryStored => {
+        const categoryTemp = new Category(categoryStored.title);
+        categoryStored.store.forEach(todoStored => {
+            const temp = new Todo(todoStored.checked, todoStored.title, todoStored.priority, todoStored.dueDate);
+            categoryTemp.addTodo(temp);
+        });
+        categoriesFetched.push(categoryTemp);
+     });
+     return categoriesFetched
+}
+categories.setCategories(fetchCategoriesLocal())
+
+pageLoad(categories);
+listeners(categories);
